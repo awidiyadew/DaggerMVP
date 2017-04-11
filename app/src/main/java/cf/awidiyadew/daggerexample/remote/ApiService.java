@@ -1,6 +1,8 @@
 package cf.awidiyadew.daggerexample.remote;
 
 import cf.awidiyadew.daggerexample.model.ApiResponse;
+import cf.awidiyadew.daggerexample.model.Barang;
+import cf.awidiyadew.daggerexample.model.Picture;
 import retrofit2.http.GET;
 import rx.Observable;
 
@@ -11,6 +13,9 @@ import rx.Observable;
 public interface ApiService {
 
     @GET("tb_barang?transform=1")
-    Observable<ApiResponse> getListBarang();
+    Observable<ApiResponse<Barang>> getListBarang();
+
+    @GET("tb_picture?transform=1")
+    Observable<ApiResponse<Picture>> getListPicture();
 
 }
