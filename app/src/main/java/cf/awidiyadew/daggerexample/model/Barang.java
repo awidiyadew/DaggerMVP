@@ -12,27 +12,35 @@ public class Barang {
     @SerializedName("id_barang")
     @Expose
     public String idBarang;
+
     @SerializedName("id_supplier")
     @Expose
     public String idSupplier;
+
     @SerializedName("nama_barang")
     @Expose
     public String namaBarang;
+
     @SerializedName("harga_beli")
     @Expose
     public String hargaBeli;
+
     @SerializedName("harga_jual")
     @Expose
     public String hargaJual;
+
     @SerializedName("merk")
     @Expose
     public String merk;
+
     @SerializedName("kategori")
     @Expose
     public String kategori;
+
     @SerializedName("keterangan")
     @Expose
     public String keterangan;
+
     @SerializedName("stok")
     @Expose
     public String stok;

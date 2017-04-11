@@ -16,6 +16,6 @@ public interface ListBarangView extends MvpView {
 
     void showData(ArrayList<Barang> listBarang);
 
-    void showError();
+    void showError(String errorMessage);
 
 }
