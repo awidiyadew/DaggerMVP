@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cf.awidiyadew.daggerexample.model.Barang;
+import cf.awidiyadew.daggerexample.model.Picture;
 import cf.awidiyadew.daggerexample.ui.base.MvpView;
 
 /**
@@ -15,6 +16,8 @@ public interface ListBarangView extends MvpView {
     void showLoading(boolean isShow);
 
     void showData(ArrayList<Barang> listBarang);
+
+    void showPicture(ArrayList<Picture> listPicture);
 
     void showError(String errorMessage);
 

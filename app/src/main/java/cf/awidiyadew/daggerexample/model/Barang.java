@@ -3,6 +3,8 @@ package cf.awidiyadew.daggerexample.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by awidiyadew on 4/11/17.
  */
@@ -44,6 +46,10 @@ public class Barang {
     @SerializedName("stok")
     @Expose
     public String stok;
+
+    @SerializedName("tb_picture")
+    @Expose
+    public ArrayList<Picture> pictures;
 
     public Barang() {
     }
@@ -118,5 +124,13 @@ public class Barang {
 
     public void setStok(String stok) {
         this.stok = stok;
+    }
+
+    public ArrayList<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(ArrayList<Picture> pictures) {
+        this.pictures = pictures;
     }
 }
