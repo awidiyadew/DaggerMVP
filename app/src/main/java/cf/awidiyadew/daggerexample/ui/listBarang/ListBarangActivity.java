@@ -1,11 +1,18 @@
 package cf.awidiyadew.daggerexample.ui.listBarang;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cf.awidiyadew.daggerexample.R;
 import cf.awidiyadew.daggerexample.model.Barang;
 import cf.awidiyadew.daggerexample.model.Picture;
@@ -15,21 +22,36 @@ public class ListBarangActivity extends BaseActivity implements ListBarangView {
 
     private static final String TAG = "ListBarangActivity";
     ListBarangPresenter mPresenter;
+    @BindView(R.id.recyclerView)
+    android.support.v7.widget.RecyclerView mRecyclerView;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+    @BindView(R.id.textProgress)
+    TextView textProgress;
+    @BindView(R.id.layoutProgress)
+    LinearLayout layoutProgress;
+
+    ListBarangAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         mPresenter = new ListBarangPresenter();
         mPresenter.attachView(this);
 
-        /*mPresenter.getListBarang();
-
-        mPresenter.getListPicture();*/
-
         mPresenter.getListBarangWithPicture();
 
+        setupRecyclerView();
+    }
+
+    private void setupRecyclerView() {
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        mAdapter = new ListBarangAdapter();
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -39,17 +61,19 @@ public class ListBarangActivity extends BaseActivity implements ListBarangView {
 
     @Override
     public void showData(ArrayList<Barang> listBarang) {
-        for (Barang barang : listBarang){
+        for (Barang barang : listBarang) {
 
-            for (Picture pic : barang.getPictures()){
+            for (Picture pic : barang.getPictures()) {
                 Log.d(TAG, "Barang with picture: " + barang.getNamaBarang() + " | " + pic.getIdPicture());
             }
+
+            mAdapter.add(barang);
         }
     }
 
     @Override
     public void showPicture(ArrayList<Picture> listPicture) {
-        for (Picture picture : listPicture){
+        for (Picture picture : listPicture) {
             Log.d(TAG, "showData: " + picture.getPath());
         }
     }
@@ -57,5 +81,11 @@ public class ListBarangActivity extends BaseActivity implements ListBarangView {
     @Override
     public void showError(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
     }
 }

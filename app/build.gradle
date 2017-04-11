@@ -28,6 +28,9 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     testCompile 'junit:junit:4.12'
 
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+
     // Butterknife
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
@@ -44,5 +47,7 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 
 }
