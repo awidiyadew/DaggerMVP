@@ -3,6 +3,7 @@ package cf.awidiyadew.daggerexample.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -132,5 +133,10 @@ public class Barang {
 
     public void setPictures(ArrayList<Picture> pictures) {
         this.pictures = pictures;
+    }
+
+    public String getRupiah(){
+        String harga = NumberFormat.getIntegerInstance().format(Integer.valueOf(getHargaJual()));
+        return "Rp " + harga;
     }
 }

@@ -17,8 +17,8 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.internal.util.SubscriptionList;
 import rx.schedulers.Schedulers;
 
 /**
@@ -35,9 +35,13 @@ public class ListBarangPresenter extends BasePresenter<ListBarangView> {
     private Subscription mSubscriptionPicture;
     private Subscription mSubscriptionJoin;
 
+    SubscriptionList mSubscriptionList;
+
     public ListBarangPresenter() {
 
         DaggerExampleApp.getApp().getComponent().inject(this);
+
+        mSubscriptionList = new SubscriptionList();
 
     }
 
@@ -71,6 +75,8 @@ public class ListBarangPresenter extends BasePresenter<ListBarangView> {
                     getMvpView().showData(new ArrayList<>(barangApiResponse.getTbBarang()));
                 }
             });
+
+        mSubscriptionList.add(mSubscriptionBarang);
     }
 
     public void getListPicture(){
@@ -103,6 +109,9 @@ public class ListBarangPresenter extends BasePresenter<ListBarangView> {
                         getMvpView().showPicture(new ArrayList<>(pictureApiResponse.getTbPicture()));
                     }
                 });
+
+        mSubscriptionList.add(mSubscriptionPicture);
+
     }
 
     public void getListBarangWithPicture(){
@@ -167,14 +176,18 @@ public class ListBarangPresenter extends BasePresenter<ListBarangView> {
             }
         });
 
+        mSubscriptionList.add(mSubscriptionJoin);
+
     }
 
     @Override
     public void detachView() {
         super.detachView();
 
-        if (mSubscriptionBarang != null && !mSubscriptionBarang.isUnsubscribed())
-            mSubscriptionBarang.unsubscribe();
+        if (mSubscriptionList.hasSubscriptions() && !mSubscriptionList.isUnsubscribed()){
+            mSubscriptionList.unsubscribe();
+            Log.d(TAG, "detachView: unsubscribe all subscription");
+        }
 
     }
 }
