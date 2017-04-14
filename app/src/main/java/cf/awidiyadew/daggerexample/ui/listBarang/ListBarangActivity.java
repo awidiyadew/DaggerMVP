@@ -1,8 +1,8 @@
 package cf.awidiyadew.daggerexample.ui.listBarang;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -18,7 +18,7 @@ import cf.awidiyadew.daggerexample.model.Barang;
 import cf.awidiyadew.daggerexample.model.Picture;
 import cf.awidiyadew.daggerexample.ui.base.BaseActivity;
 
-public class ListBarangActivity extends BaseActivity implements ListBarangView {
+public class ListBarangActivity extends BaseActivity implements ListBarangView, ListBarangAdapter.OnItemClick {
 
     private static final String TAG = "ListBarangActivity";
     ListBarangPresenter mPresenter;
@@ -50,7 +50,7 @@ public class ListBarangActivity extends BaseActivity implements ListBarangView {
     private void setupRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        mAdapter = new ListBarangAdapter();
+        mAdapter = new ListBarangAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -81,6 +81,12 @@ public class ListBarangActivity extends BaseActivity implements ListBarangView {
     @Override
     public void showError(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemClick(Barang barang) {
+        //mPresenter.gotoDetailView(barang);
+        /* TODO : GOTO DETAIL VIEW */
     }
 
     @Override

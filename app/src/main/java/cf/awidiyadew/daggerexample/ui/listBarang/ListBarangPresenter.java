@@ -28,6 +28,7 @@ import rx.schedulers.Schedulers;
 public class ListBarangPresenter extends BasePresenter<ListBarangView> {
 
     private static final String TAG = "ListBarangPresenter";
+
     @Inject
     DataManager mDataManager;
 
@@ -177,6 +178,10 @@ public class ListBarangPresenter extends BasePresenter<ListBarangView> {
         });
 
         mSubscriptionList.add(mSubscriptionJoin);
+
+    }
+
+    public void gotoDetailView(Barang barang){
 
     }
 

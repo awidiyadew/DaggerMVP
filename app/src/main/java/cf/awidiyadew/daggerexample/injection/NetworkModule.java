@@ -48,6 +48,4 @@ public class NetworkModule {
         return new OkHttpClient().newBuilder().build();
     }
 
-
-
 }

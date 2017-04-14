@@ -26,8 +26,11 @@ public class ListBarangAdapter extends RecyclerView.Adapter<ListBarangAdapter.Li
 
     ArrayList<Barang> mListBarang;
 
-    public ListBarangAdapter() {
+    OnItemClick mListener;
+
+    public ListBarangAdapter(OnItemClick onItemClick) {
         mListBarang = new ArrayList<>();
+        mListener = onItemClick;
     }
 
     @Override
@@ -52,7 +55,9 @@ public class ListBarangAdapter extends RecyclerView.Adapter<ListBarangAdapter.Li
         notifyItemInserted(mListBarang.size());
     }
 
-    public class ListBarangVHolder extends RecyclerView.ViewHolder{
+    public class ListBarangVHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        OnItemClick mListener;
 
         @BindColor(R.color.colorPrimary) int primaryColor;
         @BindView(R.id.img_thumbnail) ImageView imgThumb;
@@ -61,6 +66,7 @@ public class ListBarangAdapter extends RecyclerView.Adapter<ListBarangAdapter.Li
 
         public ListBarangVHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             ButterKnife.bind(this, itemView);
         }
 
@@ -85,5 +91,15 @@ public class ListBarangAdapter extends RecyclerView.Adapter<ListBarangAdapter.Li
             }
         }
 
+        @Override
+        public void onClick(View v) {
+            Barang barang = mListBarang.get(getAdapterPosition());
+            if (mListener != null) mListener.onItemClick(barang);
+        }
     }
+
+    public interface OnItemClick{
+        void onItemClick(Barang barang);
+    }
+
 }

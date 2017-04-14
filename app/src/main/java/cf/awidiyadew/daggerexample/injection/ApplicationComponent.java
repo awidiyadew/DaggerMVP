@@ -22,8 +22,6 @@ public interface ApplicationComponent {
 
     Application application();
 
-    void inject(ListBarangActivity listBarangActivity);
-
     void inject(ListBarangPresenter listBarangPresenter);
 
     void inject(DaggerExampleApp daggerExampleApp);

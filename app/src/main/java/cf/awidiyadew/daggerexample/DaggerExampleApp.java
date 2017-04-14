@@ -12,7 +12,7 @@ import cf.awidiyadew.daggerexample.injection.DaggerApplicationComponent;
 
 public class DaggerExampleApp extends Application {
 
-    /* TODO : DONT FORGET ADD THIS APP TO MANIFEST */
+    /* TODO : DON'T FORGET ADD THIS APP TO MANIFEST */
     private static DaggerExampleApp mDaggerExampleApp;
     ApplicationComponent mApplicationComponent;
 
@@ -29,6 +29,7 @@ public class DaggerExampleApp extends Application {
                     .build();
         }
 
+        // Apps component injeted to this app
         mApplicationComponent.inject(this);
 
     }
